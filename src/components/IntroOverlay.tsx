@@ -17,6 +17,8 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
     const video = videoRef.current;
     if (video) {
       setIsPlaying(true);
+      video.currentTime = 0;
+      video.muted = false;
       video.play().catch(() => {
         setIsExiting(true);
         setTimeout(() => onEnter(), 800);
@@ -56,20 +58,27 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
         className="absolute inset-0 w-full h-full object-cover z-20"
         playsInline
         preload="auto"
-        poster="/assets/envelope-poster.jpg"
+        muted
         onEnded={handleVideoEnded}
         onTimeUpdate={handleTimeUpdate}
+        onLoadedData={(e) => {
+          // Force show first frame
+          const v = e.currentTarget;
+          v.currentTime = 0.001;
+          v.muted = true;
+        }}
       >
         <source src="/assets/Envelope.mp4" type="video/mp4" />
       </video>
 
-      {!isPlaying && (
-        <div className="absolute inset-0 flex items-end justify-center pb-12 z-30 pointer-events-none">
-          <p className="text-maroon text-sm font-body tracking-widest uppercase animate-pulse">
-            Tap to open
-          </p>
-        </div>
-      )}
+      <div
+        className="absolute inset-0 flex items-end justify-center pb-12 z-30 pointer-events-none transition-opacity duration-700 ease-out"
+        style={{ opacity: isPlaying ? 0 : 1 }}
+      >
+        <p className="text-maroon text-sm font-body tracking-widest uppercase animate-pulse">
+          Tap to open
+        </p>
+      </div>
     </div>
   );
 }

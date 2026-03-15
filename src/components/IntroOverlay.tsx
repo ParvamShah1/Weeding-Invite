@@ -53,7 +53,7 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
     >
       <video
         ref={videoRef}
-        className="absolute inset-0 w-full h-full object-contain z-20"
+        className="absolute inset-0 w-full h-full object-cover z-20"
         playsInline
         preload="auto"
         onEnded={handleVideoEnded}

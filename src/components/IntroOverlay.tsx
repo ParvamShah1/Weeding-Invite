@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect, RefObject } from "react";
+import { useState, useRef, RefObject } from "react";
 
 interface IntroOverlayProps {
   onEnter: () => void;
@@ -11,23 +11,13 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
   const [isExiting, setIsExiting] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // On mount, seek to first frame so it's visible
-  useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.currentTime = 0.001;
-    }
-  }, []);
-
   const handleClick = () => {
     if (isPlaying || isExiting) return;
 
     const video = videoRef.current;
     if (video) {
       setIsPlaying(true);
-      // Play from the very start — no reset needed since we're at 0.001
       video.currentTime = 0;
-      video.muted = false;
       video.play().catch(() => {
         setIsExiting(true);
         setTimeout(() => onEnter(), 800);
@@ -61,18 +51,17 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
       }}
       onClick={handleClick}
     >
-      {/* Video always visible — first frame shown via seek */}
+      {/* Single video element — #t=0.001 forces first frame on iOS Safari */}
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover z-20"
         playsInline
-        preload="auto"
+        preload="metadata"
         muted
         onEnded={handleVideoEnded}
         onTimeUpdate={handleTimeUpdate}
-      >
-        <source src="/assets/Envelope.mp4" type="video/mp4" />
-      </video>
+        src="/assets/Envelope.mp4#t=0.001"
+      />
 
       {/* Tap to open */}
       <div

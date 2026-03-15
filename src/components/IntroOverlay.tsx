@@ -56,6 +56,7 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
         className="absolute inset-0 w-full h-full object-cover z-20"
         playsInline
         preload="auto"
+        poster="/assets/envelope-poster.jpg"
         onEnded={handleVideoEnded}
         onTimeUpdate={handleTimeUpdate}
       >

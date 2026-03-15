@@ -15,20 +15,32 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
     if (isPlaying || isExiting) return;
 
     const video = videoRef.current;
-    if (video) {
-      setIsPlaying(true);
-      video.currentTime = 0;
-      video.play().catch(() => {
-        setIsExiting(true);
-        setTimeout(() => onEnter(), 800);
-      });
-      if (audioRef.current) {
-        audioRef.current.play().catch(() => {});
-      }
+    if (!video) return;
+
+    setIsPlaying(true);
+
+    // Play video immediately — no seeking, no delays
+    // iOS Safari requires play() to be called synchronously in the tap handler
+    const playPromise = video.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Video started successfully — now start music too
+          if (audioRef.current) {
+            audioRef.current.play().catch(() => {});
+          }
+        })
+        .catch(() => {
+          // Video failed to play — skip to hero
+          setIsExiting(true);
+          setTimeout(() => onEnter(), 800);
+        });
     }
   };
 
   const handleVideoEnded = () => {
+    if (isExiting) return;
     setIsExiting(true);
     setTimeout(() => onEnter(), 800);
   };
@@ -51,12 +63,11 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
       }}
       onClick={handleClick}
     >
-      {/* Single video element — #t=0.001 forces first frame on iOS Safari */}
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover z-20"
         playsInline
-        preload="metadata"
+        preload="auto"
         muted
         onEnded={handleVideoEnded}
         onTimeUpdate={handleTimeUpdate}

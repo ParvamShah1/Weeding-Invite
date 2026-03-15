@@ -11,21 +11,21 @@ import Divider from "@/components/Divider";
 import MusicButton from "@/components/MusicButton";
 
 export default function Home() {
-  const [showIntro, setShowIntro] = useState(true);
+  const [introActive, setIntroActive] = useState(true);
+  const [introGone, setIntroGone] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleIntroEnter = () => {
-    setShowIntro(false);
-    if (audioRef.current) {
-      audioRef.current.play().catch(() => {});
-    }
+    setIntroActive(false);
+    // Wait for fade-out to finish before showing music button
+    setTimeout(() => setIntroGone(true), 1000);
   };
 
   return (
     <>
       <audio ref={audioRef} loop preload="auto" src="/assets/IMG_3040.mp3" />
-      {showIntro && <IntroOverlay onEnter={handleIntroEnter} />}
-      {!showIntro && <MusicButton audioRef={audioRef} />}
+      {!introGone && <IntroOverlay onEnter={handleIntroEnter} audioRef={audioRef} />}
+      {introGone && <MusicButton audioRef={audioRef} />}
       <main className="bg-ivory">
         <HeroSection />
         <CountdownSection />

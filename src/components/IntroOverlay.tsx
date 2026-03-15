@@ -1,11 +1,12 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, RefObject } from "react";
 
 interface IntroOverlayProps {
   onEnter: () => void;
+  audioRef: RefObject<HTMLAudioElement | null>;
 }
 
-export default function IntroOverlay({ onEnter }: IntroOverlayProps) {
+export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -20,6 +21,10 @@ export default function IntroOverlay({ onEnter }: IntroOverlayProps) {
         setIsExiting(true);
         setTimeout(() => onEnter(), 800);
       });
+      // Start music when video starts
+      if (audioRef.current) {
+        audioRef.current.play().catch(() => {});
+      }
     }
   };
 
@@ -46,7 +51,6 @@ export default function IntroOverlay({ onEnter }: IntroOverlayProps) {
       }}
       onClick={handleClick}
     >
-      {/* Envelope video — first frame shown as poster, plays on click */}
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-contain z-20"
@@ -58,7 +62,6 @@ export default function IntroOverlay({ onEnter }: IntroOverlayProps) {
         <source src="/assets/Envelope.mp4" type="video/mp4" />
       </video>
 
-      {/* "Tap to open" hint */}
       {!isPlaying && (
         <div className="absolute inset-0 flex items-end justify-center pb-12 z-30 pointer-events-none">
           <p className="text-maroon text-sm font-body tracking-widest uppercase animate-pulse">

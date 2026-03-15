@@ -7,11 +7,16 @@ interface MusicButtonProps {
 }
 
 export default function MusicButton({ audioRef }: MusicButtonProps) {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(() => {
+    return audioRef.current ? !audioRef.current.paused : false;
+  });
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    // Sync initial state
+    setPlaying(!audio.paused);
 
     const onPlay = () => setPlaying(true);
     const onPause = () => setPlaying(false);
@@ -26,11 +31,12 @@ export default function MusicButton({ audioRef }: MusicButtonProps) {
   }, [audioRef]);
 
   const toggle = () => {
-    if (!audioRef.current) return;
-    if (playing) {
-      audioRef.current.pause();
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      audio.play().catch(() => {});
     } else {
-      audioRef.current.play().catch(() => {});
+      audio.pause();
     }
   };
 

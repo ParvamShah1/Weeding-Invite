@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="py-16 bg-maroon text-center">
       <div>
         <Heart className="w-6 h-6 mx-auto mb-4 text-white/70" />
-        <p className="font-script text-3xl text-white mb-2">Tanvi &amp; Vinay</p>
+        <p className="font-script text-3xl text-white mb-2">Tanvi &amp; Meet</p>
         <p className="text-sm text-white/80 font-body tracking-wide">
           May 21, 2026
         </p>

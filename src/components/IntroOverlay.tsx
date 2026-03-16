@@ -71,7 +71,7 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
         muted
         onEnded={handleVideoEnded}
         onTimeUpdate={handleTimeUpdate}
-        src="/assets/Envelope.mp4#t=0.001"
+        src="/assets/Envelope T&M.mp4#t=0.001"
       />
 
       {/* Tap to open */}

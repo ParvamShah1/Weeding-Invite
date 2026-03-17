@@ -28,7 +28,7 @@ export default function HeroSection() {
             Daughter of Uday Pandurang Sait & Trupti Uday Sait
           </p>
 
-          <div className="flex items-center justify-center gap-4 my-4 md:my-5">
+          <div className="flex items-center justify-center gap-4 my-3">
             <span className="font-display text-xl md:text-2xl font-light text-gold italic drop-shadow-md">
               WEDS
             </span>
@@ -42,14 +42,14 @@ export default function HeroSection() {
           </p>
         </div>
 
-        <div className="flex items-center justify-center gap-4 mt-8 md:mt-10 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+        <div className="flex items-center justify-center gap-4 mt-4 md:mt-5 animate-fade-in" style={{ animationDelay: "0.4s" }}>
           <span className="h-px bg-white/40 w-12 md:w-20" />
           <span className="text-gold text-sm drop-shadow-md">✦</span>
           <span className="h-px bg-white/40 w-12 md:w-20" />
         </div>
 
         <p
-          className="text-lg md:text-xl font-display font-semibold tracking-wider text-white italic drop-shadow-md mt-4 animate-fade-in-up"
+          className="text-lg md:text-xl font-display font-semibold tracking-wider text-white italic drop-shadow-md mt-2 animate-fade-in-up"
           style={{ animationDelay: "0.6s" }}
         >
           May 21, 2026 · 7 PM Onwards

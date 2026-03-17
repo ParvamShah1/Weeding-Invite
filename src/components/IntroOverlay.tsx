@@ -79,7 +79,7 @@ export default function IntroOverlay({ onEnter, audioRef }: IntroOverlayProps) {
         className="absolute inset-0 flex items-end justify-center pb-12 z-30 pointer-events-none transition-opacity duration-700 ease-out"
         style={{ opacity: isPlaying ? 0 : 1 }}
       >
-        <p className="text-maroon text-sm font-body tracking-widest uppercase animate-pulse">
+        <p className="text-white text-sm font-body tracking-widest uppercase animate-pulse">
           Tap to open
         </p>
       </div>

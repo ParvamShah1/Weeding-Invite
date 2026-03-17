@@ -33,12 +33,12 @@ export default function CountdownSection() {
   ];
 
   return (
-    <section id="countdown" className="section-padding" style={{ backgroundColor: "var(--countdown)" }}>
+    <section id="countdown" className="section-padding bg-ivory">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-script text-4xl md:text-5xl text-white mb-2">
+        <h2 className="font-script text-4xl md:text-5xl text-maroon mb-2">
           Countdown
         </h2>
-        <p className="text-white/70 text-lg font-body tracking-wide mb-12">
+        <p className="text-sage text-lg font-body tracking-wide mb-12">
           To the most special day of our lives
         </p>
 
@@ -46,12 +46,12 @@ export default function CountdownSection() {
           {items.map((item) => (
             <div
               key={item.label}
-              className="bg-white/10 backdrop-blur-sm p-6 md:p-8 border border-white/20 rounded-lg"
+              className="bg-cream p-6 md:p-8 border border-sage-light rounded-lg"
             >
-              <span className="block font-display text-4xl md:text-6xl font-light text-white">
+              <span className="block font-display text-4xl md:text-6xl font-light text-maroon">
                 {String(item.value).padStart(item.label === "Days" ? 1 : 2, "0")}
               </span>
-              <span className="block mt-2 text-xs tracking-[0.2em] uppercase text-white/70 font-body">
+              <span className="block mt-2 text-xs tracking-[0.2em] uppercase text-sage font-body">
                 {item.label}
               </span>
             </div>

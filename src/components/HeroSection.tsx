@@ -7,7 +7,8 @@ export default function HeroSection() {
       <div className="absolute inset-0">
         <video
           src="/assets/Sufi Night Website Video.mp4"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover"
+          style={{ objectPosition: "right center" }}
           autoPlay
           loop
           playsInline
@@ -48,10 +49,10 @@ export default function HeroSection() {
         </div>
 
         <p
-          className="text-base md:text-lg font-display tracking-wider text-white/80 italic drop-shadow-md mt-4 animate-fade-in-up"
+          className="text-lg md:text-xl font-display font-semibold tracking-wider text-white italic drop-shadow-md mt-4 animate-fade-in-up"
           style={{ animationDelay: "0.6s" }}
         >
-          May 21, 2026
+          May 21, 2026 · 7 PM Onwards
         </p>
       </div>
 

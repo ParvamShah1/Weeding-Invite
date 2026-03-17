@@ -28,12 +28,13 @@ export default function Home() {
       {introGone && <MusicButton audioRef={audioRef} />}
       <main className="bg-ivory">
         <HeroSection />
-        <CountdownSection />
         <DetailsSection />
         <Divider />
         <DressCodeSection />
         <Divider />
         <ProgramSection />
+        <Divider />
+        <CountdownSection />
         <Footer />
       </main>
     </>

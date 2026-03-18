@@ -30,7 +30,7 @@ export default function HeroSection() {
 
           <div className="flex items-center justify-center gap-4 my-3">
             <span className="font-display text-xl md:text-2xl font-light text-gold italic drop-shadow-md">
-              WEDS
+              &
             </span>
           </div>
 

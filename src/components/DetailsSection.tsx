@@ -16,7 +16,7 @@ export default function DetailsSection() {
             style={{ width: "80px", height: "auto" }}
           />
           <h2 className="font-script text-4xl md:text-5xl text-sage-dark mb-2">
-            Event Details
+            Reception Details
           </h2>
           <p className="text-sage-dark/70 font-body tracking-wide">
             Everything you need to know

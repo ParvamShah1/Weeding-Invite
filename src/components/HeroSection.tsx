@@ -1,11 +1,53 @@
 "use client";
+import { useEffect, useRef, useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 
 export default function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const tryPlay = useCallback(() => {
+    const v = videoRef.current;
+    if (v && v.paused) {
+      v.play().catch(() => {});
+    }
+  }, []);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+
+    // Safari may pause on visibility change or low power — resume on these events
+    v.addEventListener("pause", tryPlay);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") tryPlay();
+    });
+    window.addEventListener("focus", tryPlay);
+
+    // Also try playing on first interaction (Safari sometimes needs it)
+    const onInteraction = () => {
+      tryPlay();
+      window.removeEventListener("touchstart", onInteraction);
+      window.removeEventListener("click", onInteraction);
+    };
+    window.addEventListener("touchstart", onInteraction, { passive: true });
+    window.addEventListener("click", onInteraction);
+
+    // Initial play attempt
+    tryPlay();
+
+    return () => {
+      v.removeEventListener("pause", tryPlay);
+      window.removeEventListener("focus", tryPlay);
+      window.removeEventListener("touchstart", onInteraction);
+      window.removeEventListener("click", onInteraction);
+    };
+  }, [tryPlay]);
+
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-ivory">
       <div className="absolute inset-0">
         <video
+          ref={videoRef}
           src="/assets/Sufi Night Website Video.mp4"
           className="w-full h-full object-cover"
           style={{ objectPosition: "right center" }}

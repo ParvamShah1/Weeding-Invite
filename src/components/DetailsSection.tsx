@@ -67,7 +67,7 @@ export default function DetailsSection() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="https://maps.app.goo.gl/jGzrTY6nq7TZBgAc6"
+              href="https://maps.app.goo.gl/sNiRgXb8xQGgCmBH9?g_st=ic"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors border bg-ivory h-9 rounded-md px-3 gap-2 border-maroon/30 text-charcoal hover:bg-maroon hover:text-white"
